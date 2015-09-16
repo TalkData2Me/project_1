@@ -44,8 +44,8 @@ def datetime_func(date_string):
 
 def merge_source(src1,src2):
 
-    meta_movies = [meta for meta in src2 if isinstance(meta, dict) and 'title' in meta.keys()]
-    mojo_movies = [mojo for mojo in src1 if isinstance(mojo, dict) and 'title' in mojo.keys()]
+    meta_movies = list([meta for meta in src2 if isinstance(meta, dict) and 'title' in meta.keys()])
+    mojo_movies = list([mojo for mojo in src1 if isinstance(mojo, dict) and 'title' in mojo.keys()])
 
     for meta_movie in meta_movies:
         for mojo_movie in mojo_movies:
