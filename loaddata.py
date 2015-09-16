@@ -22,7 +22,7 @@ def get_boxofficemojo_movies(dirname):
 
     file_contents = os.listdir(dirname)
     
-    mov = [file_contents for file_contents in src2 if isinstance(file_contents, dict) and 'title' in file_contents.keys()]
+    mov = [file_contents for file_contents in dirname if isinstance(file_contents, dict) and 'title' in file_contents.keys()]
     file_contents = mov
     
     movie_list = []
