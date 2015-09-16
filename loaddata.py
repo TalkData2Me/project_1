@@ -19,12 +19,8 @@ MOJO_DIR = os.path.join(DATA_DIR, 'boxofficemojo')
 META_DIR = os.path.join(DATA_DIR,'metacritic')
 
 def get_boxofficemojo_movies(dirname):
-
     file_contents = os.listdir(dirname)
-    
-    mov = [file_contents for file_contents in dirname if isinstance(file_contents, dict) and 'title' in file_contents.keys()]
-    file_contents = mov
-    
+
     movie_list = []
 
     for filename in file_contents:
@@ -34,6 +30,9 @@ def get_boxofficemojo_movies(dirname):
             movie_data = json.load(movie_file)
 
         movie_list.append(movie_data)
+         
+        #removing the lists
+        movie_list = [mv for mv in movie_list if isinstance(mv, dict) and 'title' in mv.keys()]
 
     print "Parsed %i movies from %i files" % (len(movie_list),
                                               len(file_contents))
@@ -47,6 +46,7 @@ def merge_source(src1,src2):
 
     meta_movies = [meta for meta in src2 if isinstance(meta, dict) and 'title' in meta.keys()]
     mojo_movies = [mojo for mojo in src1 if isinstance(mojo, dict) and 'title' in mojo.keys()]
+
     for meta_movie in meta_movies:
         for mojo_movie in mojo_movies:
             if meta_movie['title'] == mojo_movie['title']:
@@ -83,5 +83,7 @@ if __name__ == "__main__":
     # print types
     meta_mojo_movies_merged=merge_source(mojo_movies, meta_movies)
 
-    
+    #x=open('/','w')
+
+
     pprint(meta_mojo_movies_merged[:3])
