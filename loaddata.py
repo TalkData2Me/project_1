@@ -19,8 +19,12 @@ MOJO_DIR = os.path.join(DATA_DIR, 'boxofficemojo')
 META_DIR = os.path.join(DATA_DIR,'metacritic')
 
 def get_boxofficemojo_movies(dirname):
-    file_contents = os.listdir(dirname)
 
+    file_contents = os.listdir(dirname)
+    
+    mov = [file_contents for file_contents in src2 if isinstance(file_contents, dict) and 'title' in file_contents.keys()]
+    file_contents = mov
+    
     movie_list = []
 
     for filename in file_contents:
