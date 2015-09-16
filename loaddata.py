@@ -42,25 +42,6 @@ def datetime_func(date_string):
     if date_string:
         return datetime.date(*(int(dstr) for dstr in date_string.split('-')))
 
-def merge_source(src1,src2):
-
-    meta_movies = list([meta for meta in src2 if isinstance(meta, dict) and 'title' in meta.keys()])
-    mojo_movies = list([mojo for mojo in src1 if isinstance(mojo, dict) and 'title' in mojo.keys()])
-
-    for meta_movie in meta_movies:
-        for mojo_movie in mojo_movies:
-            if meta_movie['title'] == mojo_movie['title']:
-                meta_movie.update(mojo_movie)
-    return meta_movies
-#        sorting_key = operator.itemgetter("title")
-#        if sorting_key:
-#            meta = sorted(src1,key=sorting_key)
-#            mojo = sorted(src2,key=sorting_key)
-
-#            for meta_m,mojo_m in zip(meta,mojo):
-#                meta_m.update(mojo_m)
-
-#            return meta_m
 
 
 if __name__ == "__main__":
@@ -81,7 +62,7 @@ if __name__ == "__main__":
     #mojo_movies[:2]
     #print meta_movies[:2]
     # print types
-    meta_mojo_movies_merged=merge_source(mojo_movies, meta_movies)
+    #meta_mojo_movies_merged=merge_source(mojo_movies, meta_movies)
 
     #x=open('/','w')
 
