@@ -57,11 +57,34 @@ if __name__ == "__main__":
         movie['title'] = title
 
     meta_movies = get_boxofficemojo_movies(META_DIR)
+
+    critic_reviews=['critic_review_positive','critic_review_neutral','critic_review_negative','critic_review_total']
+    user_reviews=['user_review_positive','user_review_neutral','user_review_negative','user_review_total']
+    genre_c=['genre_combined']
     for movie in meta_movies:
+        movie.update(dict(zip(critic_reviews,movie['num_critic_reviews'])))
+        movie.update(dict(zip(user_reviews,movie['num_user_reviews'])))
+        movie.update(dict(zip(genre_c,['_'.join(sorted(movie['genre']))])))
+
+
         title =re.sub(r'\sub{2,}',' ',movie['title']).strip().upper()
         title =re.sub('[^A-Za-z0-9]+', ' ', title)
         movie['title'] = title
 
+    pprint(meta_movies[0])
+
+
+    # import collections
+    # types = collections.Counter()
+    # for movies in meta_movies:
+    #     types.update([type(movies)])
+    # mojo_movies[:2]
+    # print meta_movies[:2]
+    # print types
+    # meta_mojo_movies_merged=merge_source(mojo_movies, meta_movies,'title')
+
+    # x=open('/','w')
 
     print collections.Counter([len(a.keys()) for a in mojo_movies])
     print collections.Counter([len(a.keys()) for a in meta_movies])
+    #pprint(meta_mojo_movies_merged[:3])
